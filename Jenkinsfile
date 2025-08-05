@@ -15,7 +15,7 @@ pipeline {
        
         stage('Build') {
             steps {
-                sh 'arm-none-eabi-gcc --version'
+                sh 'make all'
             }
         }
 
@@ -27,8 +27,8 @@ pipeline {
         }
         stage('Flash') {
             steps {
-                echo 'Running flash...'
-                sh 'pyocd list'
+                echo 'Flash the ELF...'
+                sh 'pyocd flash -t stm32f429zitx build/stm32f429_ci.elf'
             }
         }        
     }
