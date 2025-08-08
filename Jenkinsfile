@@ -13,6 +13,22 @@ pipeline {
     }
 
     stages {
+
+        stage('Static Analysis') {
+            steps {
+                sh '''
+                    echo "Running static analysis (cppcheck) for STM32F429..."
+                    cppcheck --enable=all --inconclusive --xml --xml-version=2 \
+                        --std=c11 --force \
+                        --suppress=missingIncludeSystem \
+                        -I Drivers/CMSIS/Include \
+                        -I Drivers/STM32F4xx_HAL_Driver/Inc \
+                        -I Core/Inc \
+                        Core/Src 2> cppcheck-report.xml || true
+                '''
+                recordIssues tools: [cppCheck(pattern: 'cppcheck-report.xml')]
+            }
+        }
        
         stage('Build') {
             steps {
