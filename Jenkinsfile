@@ -28,7 +28,7 @@ pipeline {
         stage('Flash') {
             steps {
                 echo 'Flash the ELF...'
-                sh 'pyocd flash -t stm32f429zitx build/stm32f429_ci.elf'
+                sh 'make flash'
             }
         }        
     }
