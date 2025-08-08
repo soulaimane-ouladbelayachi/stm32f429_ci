@@ -30,9 +30,18 @@ pipeline {
             }
         }
        
-        stage('Build') {
+        stage('Build Firmware') {
             steps {
-                sh 'make all'
+                sh '''
+                    echo "Building firmware for STM32F429..."
+                    make clean
+                    make all
+                '''
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: "build/*.elf, build/*.bin", fingerprint: true
+                }
             }
         }
 
