@@ -11,6 +11,13 @@ pipeline {
         GIT_BRANCH = 'main' 
         GIT_CREDENTIALS = '0a7d8ffd-bec3-4c56-808f-725328520473' 
     }
+
+    options {
+        timestamps()
+        ansiColor('xterm')
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        disableConcurrentBuilds()
+    }
     stages {
        
         stage('Build') {
