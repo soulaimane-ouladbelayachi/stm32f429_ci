@@ -73,7 +73,7 @@ int main(void)
 
   gpio_init_t led = {
       .port        = GPIOG,
-      .pin         = LL_GPIO_PIN_13,
+      .pin         = LL_GPIO_PIN_14,
       .mode        = GPIO_MODE_OUTPUT,
       .output_type = GPIO_OUTPUT_PUSHPULL,
       .speed       = GPIO_SPEED_HIGH,
@@ -87,7 +87,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    gpio_toggle(GPIOD, LL_GPIO_PIN_12);
+    gpio_toggle(led.port, led.pin);
     for (volatile int i = 0; i < 1000000; i++);
   }
   /* USER CODE END 3 */
